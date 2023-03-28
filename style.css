@@ -58,3 +58,14 @@ body{
 .task-input input::placeholder{
     color: #bfbfbf;
 }
+
+.controls, li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+controls{
+    padding: 18px 25px;
+    border-bottom: 1px solid #ccc
+}
