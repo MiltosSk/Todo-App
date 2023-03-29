@@ -84,3 +84,27 @@ controls{
 .filters span.active{
     color: #1e293b;
 }
+
+.controls .clear-btn{
+    border: none;
+    opacity: 0.6;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 7px 13px;
+    border-radius: 4px;
+    background: #1e293b;
+    letter-spacing: 0.3px;
+    pointer-events: none;
+    transition: transform 0.25s ease;
+}
+
+.clear-btn.active{
+    opacity: 0.9;
+    pointer-events: auto;
+}
+
+.clear-btn:active{
+    transform: scale(0.93);
+}
