@@ -69,3 +69,18 @@ controls{
     padding: 18px 25px;
     border-bottom: 1px solid #ccc
 }
+
+.filters span{
+    margin: 0 8px;
+    font-size: 17px;
+    color: #444;
+    cursor: pointer;
+}
+
+.filters span: first-child{
+    margin-left: 0;
+}
+
+.filters span.active{
+    color: #1e293b;
+}
