@@ -27,7 +27,13 @@ function showTodo(filter){
                         type="checkbox" id="${id}" ${completed}>
                         <p class="${completed}">${todo.name}</p>
                     </label>
-                    `
+                    <div class="settings">
+                        <i onClick="showMenu(this)" class="uil uil-ellipsis-h></i>
+                        <ul class="task-menu">
+                            <li onClick='edit-task(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
+                            <li onClick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
+                        </ul>
+                    </div>`
             }
         })
     }
