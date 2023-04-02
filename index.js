@@ -33,8 +33,16 @@ function showTodo(filter){
                             <li onClick='edit-task(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
                             <li onClick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
                         </ul>
-                    </div>`
+                    </div>
+                </li>`
             }
         })
     }
+
+
+    taskBox.innerHTML = liTag || `<span>You don't have any task here</span>`;
+    let checkTask = taskBox.querySelector(".task");
+    !checkTask.length ? clearAll.classList.remove("active") : clearAll.classList.add("active");
+    taskBox.offsetHeight >= 300 ? taskBox.classList.add("overflow") : taskBox.classList.remove("overflow");
 }
+showTodo("all");
