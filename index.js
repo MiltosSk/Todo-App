@@ -83,3 +83,10 @@ function deleteTask(deleteId, filter){
     localStorage.setItem("todo-list", JSON.stringify(todos));
     showTodo(filter);
 }
+
+clearAll.addEventListener("click", () =>{
+    isEditTask = false;
+    todos.splice(0, todos.length);
+    localStorage.setItem("todo-list", JSON.stringify(todo));
+    showTodo();
+});
