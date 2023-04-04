@@ -76,3 +76,10 @@ function editTask(taskId, textName){
     taskInput.focus();
     taskInput.classList.add("active");
 }
+
+function deleteTask(deleteId, filter){
+    isEditTask = false;
+    todos.splice(deleteId, 1);
+    localStorage.setItem("todo-list", JSON.stringify(todos));
+    showTodo(filter);
+}
