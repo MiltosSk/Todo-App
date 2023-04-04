@@ -90,3 +90,20 @@ clearAll.addEventListener("click", () =>{
     localStorage.setItem("todo-list", JSON.stringify(todo));
     showTodo();
 });
+
+taskInput.addEventListener("keyup", e => {
+    let userTask = taskInput.value.trim();
+    if (e.key == "Enter" && userTask){
+        if(!isEditTask){
+            todos = !todos ? [] : todos;
+            let taskInfo = { name: userTask, status: "pending" };
+            todos.push(taskInfo);
+        } else {
+            isEditTask = false;
+            todos[editId].name = userTask;
+        }
+        taskInput.value = "";
+        localStorage.setItem("todo-list", JSON.stringify(todos));
+        showTodo(document.querySelector("span .active".id));
+    }    
+});
