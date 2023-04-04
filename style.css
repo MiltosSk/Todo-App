@@ -142,3 +142,29 @@ body{
     align-items: flex-start;
     border-bottom: 1px solid #ccc;
 }
+
+.task-box .task:last-child{
+    margin-bottom: 0;
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.task-box .task label{
+    display: flex;
+    align-items: flex-start;
+}
+
+.task-box label input{
+    margin-top: 7px;
+    accent-color: #1e293b;
+}
+
+.task-box label p{
+    user-select: none;
+    margin-left: 12px;
+    word-wrap: break-word;
+}
+
+.task label p.checked{
+    text-decoration: line-through;
+}
