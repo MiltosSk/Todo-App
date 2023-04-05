@@ -168,3 +168,25 @@ body{
 .task label p.checked{
     text-decoration: line-through;
 }
+
+.task-box .settings{
+    position: relative;
+}
+
+.settings :where(i, li){
+    cursor: pointer;
+}
+
+.settings .task-menu{
+    z-index: 10;
+    right: -5px;
+    bottom: -65px;
+    padding: 5px 0;
+    background: #fff;
+    postion: absolute;
+    border-radius: 4px;
+    transform: scale(0);
+    transform-origin: top-right;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
