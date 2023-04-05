@@ -1,5 +1,5 @@
 const taskInput = document.querySelector(".task-input input"),
-filters = document.querySelector(".filters span"),
+fiLter = document.querySelector(".filters span"),
 clearAll = document.querySelector(".clear-btn"),
 taskBox = document.querySelector(".task-box")
 
@@ -7,12 +7,14 @@ let editId,
 isEditTask = false,
 todos = JSON.parse(localStorage.getItem("todo-list"));
 
+const filters = Array.from(fiLter);
+
 filters.forEach(btn =>{
     btn.addEventListener("click", () =>{
         document.querySelector("span.active").classList.remove("active");
         btn.classList.add("active");
         showTodo(btn.id);
-    })
+    });
 });
 
 function showTodo(filter){
@@ -30,7 +32,7 @@ function showTodo(filter){
                     <div class="settings">
                         <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
                         <ul class="task-menu">
-                            <li onclick='edit-task(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
+                            <li onclick='editTask(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
                             <li onclick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
                         </ul>
                     </div>
@@ -87,7 +89,7 @@ function deleteTask(deleteId, filter){
 clearAll.addEventListener("click", () =>{
     isEditTask = false;
     todos.splice(0, todos.length);
-    localStorage.setItem("todo-list", JSON.stringify(todo));
+    localStorage.setItem("todo-list", JSON.stringify(todos));
     showTodo();
 });
 
@@ -104,6 +106,6 @@ taskInput.addEventListener("keyup", e => {
         }
         taskInput.value = "";
         localStorage.setItem("todo-list", JSON.stringify(todos));
-        showTodo(document.querySelector("span .active".id));
+        showTodo(document.querySelector("span.active").id);
     }    
 });
