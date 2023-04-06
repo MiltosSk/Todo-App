@@ -1,32 +1,29 @@
 const taskInput = document.querySelector(".task-input input"),
-fiLter = document.querySelector(".filters span"),
-clearAll = document.querySelector(".clear-btn"),
-taskBox = document.querySelector(".task-box")
+    filters = document.querySelectorAll(".filters span"),
+    clearAll = document.querySelector(".clear-btn"),
+    taskBox = document.querySelector(".task-box");
 
 let editId,
-isEditTask = false,
-todos = JSON.parse(localStorage.getItem("todo-list"));
+    isEditTask = false,
+    todos = JSON.parse(localStorage.getItem("todo-list"));
 
-const filters = Array.from(fiLter);
-
-filters.forEach(btn =>{
-    btn.addEventListener("click", () =>{
+filters.forEach(btn => {
+    btn.addEventListener("click", () => {
         document.querySelector("span.active").classList.remove("active");
         btn.classList.add("active");
         showTodo(btn.id);
     });
 });
 
-function showTodo(filter){
+function showTodo(filter) {
     let liTag = "";
-    if(todos){
-        todos.forEach((todo, id) =>{
+    if (todos) {
+        todos.forEach((todo, id) => {
             let completed = todo.status == "completed" ? "checked" : "";
-            if(filter == todo.status || filter == "all"){
+            if (filter == todo.status || filter == "all") {
                 liTag += `<li class="task">
                     <label for="${id}">
-                        <input onClick="updateStatus(this)"
-                        type="checkbox" id="${id}" ${completed}>
+                        <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
                         <p class="${completed}">${todo.name}</p>
                     </label>
                     <div class="settings">
@@ -41,37 +38,40 @@ function showTodo(filter){
         });
     }
 
-
     taskBox.innerHTML = liTag || `<span>You don't have any task here</span>`;
     let checkTask = taskBox.querySelectorAll(".task");
     !checkTask.length ? clearAll.classList.remove("active") : clearAll.classList.add("active");
     taskBox.offsetHeight >= 300 ? taskBox.classList.add("overflow") : taskBox.classList.remove("overflow");
+
 }
 showTodo("all");
 
-function showMenu(selectedTask){
+//i have added a task before tutorial so that shows here for test
+// if you don't have any tasks no problem it isn't bug
+
+function showMenu(selectedTask) {
     let menuDiv = selectedTask.parentElement.lastElementChild;
     menuDiv.classList.add("show");
-    document.addEventListener("click", e =>{
-        if(e.target.tagName != "I" || e.target != selectedTask){
+    document.addEventListener("click", e => {
+        if (e.target.tagName != "I" || e.target != selectedTask) {
             menuDiv.classList.remove("show");
         }
     });
 }
 
-function updateStatus(selectedTask){
+function updateStatus(selectedTask) {
     let taskName = selectedTask.parentElement.lastElementChild;
-    if(selectedTask.checked){
+    if (selectedTask.checked) {
         taskName.classList.add("checked");
         todos[selectedTask.id].status = "completed";
-    }else{
+    } else {
         taskName.classList.remove("checked");
         todos[selectedTask.id].status = "pending";
     }
-    localStorage.setItem("todo-list", JSON.stringify(todos));
+    localStorage.setItem("todo-list", JSON.stringify(todos))
 }
 
-function editTask(taskId, textName){
+function editTask(taskId, textName) {
     editId = taskId;
     isEditTask = true;
     taskInput.value = textName;
@@ -79,14 +79,14 @@ function editTask(taskId, textName){
     taskInput.classList.add("active");
 }
 
-function deleteTask(deleteId, filter){
+function deleteTask(deleteId, filter) {
     isEditTask = false;
     todos.splice(deleteId, 1);
     localStorage.setItem("todo-list", JSON.stringify(todos));
     showTodo(filter);
 }
 
-clearAll.addEventListener("click", () =>{
+clearAll.addEventListener("click", () => {
     isEditTask = false;
     todos.splice(0, todos.length);
     localStorage.setItem("todo-list", JSON.stringify(todos));
@@ -95,8 +95,8 @@ clearAll.addEventListener("click", () =>{
 
 taskInput.addEventListener("keyup", e => {
     let userTask = taskInput.value.trim();
-    if (e.key == "Enter" && userTask){
-        if(!isEditTask){
+    if (e.key == "Enter" && userTask) {
+        if (!isEditTask) {
             todos = !todos ? [] : todos;
             let taskInfo = { name: userTask, status: "pending" };
             todos.push(taskInfo);
@@ -107,5 +107,5 @@ taskInput.addEventListener("keyup", e => {
         taskInput.value = "";
         localStorage.setItem("todo-list", JSON.stringify(todos));
         showTodo(document.querySelector("span.active").id);
-    }    
+    }
 });
